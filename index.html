@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Jota - Your Simple Note App</title>
+   
+    <script src="js/modernizr.js" type="text/javascript"></script>
+
+ <link href="css/bootstrap.css" rel="stylesheet">
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+ <link href="css/bootstrap-theme.css" rel="stylesheet">
+
+ 
+ <meta name="viewport" content="width=device-width">
+
+    
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+    
+  </head>
+
+  <body>
+
+    <h1 class="header">Jota - Your Simple Note App</h1>
+    </br>
+<div ng-app="jota" class="app">
+  <div ng-controller="notesController">
+  
+    <span class="icons">
+    <button type="button" class="btn-success" ng-click="addNote()">New</button>
+      </span>
+    <div class="note" ng-repeat="note in notes | orderBy:'createdOn':true track by $index">
+      <span class="date">{{note.createdOn | date:"EEEE dd MMMM, yyyy 'at' h:mma"}}</span>
+      <span class="icons">
+      <img src="img/check_128.png" height="15px" width="15px"  ng-if="note.edit == false"></img>
+      <img src="img/pencil.png" height="15px" width="15px"  ng-if="note.edit == true"></img>
+      <img src="img/bin.png" height="15px" width="15px"  ng-click="delete(notes.length - $index - 1)"></i></span>
+      
+      <div class="markdown-body" ng-model="note.text" ng-change="update(notes.length - $index - 1,note.text)" ng-focus="note.edit = true" ng-blur="note.edit = false" markdown-editable contenteditable="true">{{ note.text }}</div>
+    </div>
+  </div>
+</div>
+
+
+<script src='js/angular.min.js'></script>
+
+<script src='js/angular-markdown-editable.js'></script>
+
+<script src="js/script.js"></script>
+
+    
+    
+  </body>
+</html>
